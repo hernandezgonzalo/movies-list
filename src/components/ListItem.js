@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
@@ -12,13 +12,24 @@ const Delete = styled(FontAwesomeIcon)`
   }
 `;
 
-const ListItem = ({ movie, removeMovie }) => {
+const ListItem = ({ movie, removeMovie, toggleWatched }) => {
+  const [watched, setWatched] = useState(movie.watched);
+
   const handleRemove = () => removeMovie(movie);
+  const handleToggleWatched = () => toggleWatched(movie);
+
+  useEffect(() => {
+    setWatched(movie.watched);
+  }, [movie]);
 
   return (
     <tr>
       <td>
-        <input type="checkbox" checked={movie.watched} readOnly />
+        <input
+          type="checkbox"
+          checked={watched}
+          onChange={handleToggleWatched}
+        />
       </td>
       <td>{movie.title}</td>
       <td>
@@ -37,9 +48,8 @@ const ListItem = ({ movie, removeMovie }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  removeMovie: movie => {
-    dispatch({ type: "REMOVE_MOVIE", movie });
-  }
+  removeMovie: movie => dispatch({ type: "REMOVE_MOVIE", movie }),
+  toggleWatched: movie => dispatch({ type: "TOGGLE_WATCHED", movie })
 });
 
 export default connect(null, mapDispatchToProps)(ListItem);
