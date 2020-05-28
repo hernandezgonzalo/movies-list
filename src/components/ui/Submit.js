@@ -11,6 +11,10 @@ const Button = styled.input`
   border-radius: 3px;
   font-family: ${props => props.theme.fonts};
   font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Submit = ({ value }) => {
