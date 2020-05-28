@@ -9,7 +9,7 @@ const NewMovieForm = ({ addMovie }) => {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = ({ title }) => {
-    addMovie({ title, genres });
+    addMovie({ title, genres, watched: false });
     setGenres([]);
   };
 

@@ -21,7 +21,6 @@ const Table = styled.table`
 `;
 
 const MoviesList = ({ movies }) => {
-  console.log(movies);
   return (
     <Table>
       <tbody>

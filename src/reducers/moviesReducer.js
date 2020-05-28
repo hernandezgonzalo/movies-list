@@ -14,6 +14,7 @@ const initState = {
 };
 
 const moviesReducer = (state = initState, action) => {
+  console.log(state, action);
   switch (action.type) {
     case "ADD_MOVIE":
       if (state.movies.some(movie => movie.title === action.movie.title))
@@ -24,6 +25,16 @@ const moviesReducer = (state = initState, action) => {
       return {
         ...state,
         movies: state.movies.filter(movie => movie.title !== action.movie.title)
+      };
+
+    case "TOGGLE_WATCHED":
+      return {
+        ...state,
+        movies: state.movies.map(movie =>
+          movie.title === action.movie.title
+            ? { ...movie, watched: !movie.watched }
+            : movie
+        )
       };
 
     default:
