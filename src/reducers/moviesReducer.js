@@ -14,11 +14,21 @@ const initState = {
 };
 
 const moviesReducer = (state = initState, action) => {
-  console.log(state, action);
-  if (action.type === "ADD_MOVIE")
-    return { ...state, movies: [...state.movies, action.movie] };
+  switch (action.type) {
+    case "ADD_MOVIE":
+      if (state.movies.some(movie => movie.title === action.movie.title))
+        return state; // if the movie title already exists do not add it
+      return { ...state, movies: [...state.movies, action.movie] };
 
-  return state;
+    case "REMOVE_MOVIE":
+      return {
+        ...state,
+        movies: state.movies.filter(movie => movie.title !== action.movie.title)
+      };
+
+    default:
+      return state;
+  }
 };
 
 export default moviesReducer;
