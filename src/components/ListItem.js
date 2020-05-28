@@ -8,7 +8,10 @@ const ListItem = ({ movie }) => (
     <td>{movie.title}</td>
     <td>
       {movie.genres.map((genre, index) => (
-        <span key={index}>{genre}</span>
+        <span key={index}>
+          {genre}
+          {movie.genres.length - 1 > index && ", "}
+        </span>
       ))}
     </td>
   </tr>

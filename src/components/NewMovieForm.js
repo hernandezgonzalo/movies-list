@@ -1,27 +1,36 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Submit from "./ui/Submit";
+import GenreTags from "./GenreTags";
+import Input from "./ui/Input";
 
-const NewMovieForm = () => {
+const NewMovieForm = ({ addMovie }) => {
   const [genres, setGenres] = useState([]);
   const { register, handleSubmit, errors } = useForm();
 
-  const onSubmit = data => {
-    console.log(data.title, genres);
+  const onSubmit = ({ title }) => {
+    addMovie({ title, genres });
+    setGenres([]);
   };
 
   // add new genre to state
   const handleAddGenre = value => {
-    setGenres([...genres, value]);
+    const newGenre = value.toLowerCase();
+    if (!genres.includes(newGenre)) setGenres([...genres, newGenre]); // add genre if it is not already in the list
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input name="title" ref={register({ required: true })} />
+        <Input
+          name="title"
+          placeholder="Title"
+          ref={register({ required: true })}
+        />
         {errors.title && <span>This field is required</span>}
-        <input
+        <Input
           name="genre"
+          placeholder="Genre"
           onKeyPress={e => {
             if (e.charCode === 13) {
               e.preventDefault(); // avoid submit when enter is pressed
@@ -30,12 +39,8 @@ const NewMovieForm = () => {
           }}
         />
         <Submit value={"Add movie"} />
+        <GenreTags genres={genres} />
       </form>
-      <ul>
-        {genres.map((genre, index) => (
-          <li key={index}>{genre}</li>
-        ))}
-      </ul>
     </div>
   );
 };

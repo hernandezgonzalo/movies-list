@@ -1,12 +1,14 @@
 import React from "react";
-import "./App.css";
 import Home from "./pages/Home";
+import Theme from "./components/ui/Theme";
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <Theme>
+      <div>
+        <Home />
+      </div>
+    </Theme>
   );
 }
 

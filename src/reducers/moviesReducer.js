@@ -2,7 +2,7 @@ const initState = {
   movies: [
     {
       title: "El viaje de Chihiro",
-      genres: ["fantasy"],
+      genres: ["fantasy", "drama"],
       watched: true
     },
     {
@@ -14,6 +14,10 @@ const initState = {
 };
 
 const moviesReducer = (state = initState, action) => {
+  console.log(state, action);
+  if (action.type === "ADD_MOVIE")
+    return { ...state, movies: [...state.movies, action.movie] };
+
   return state;
 };
 
