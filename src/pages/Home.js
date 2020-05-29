@@ -3,52 +3,39 @@ import { connect } from "react-redux";
 import MoviesList from "../components/MoviesList";
 import NewMovieForm from "../components/NewMovieForm";
 import { useQuery } from "../hooks/useQuery";
-import RadioButton from "../components/ui/RadioButton";
 import { useHistory } from "react-router-dom";
-import Button from "../components/ui/Button";
+import GenreRadioButtons from "../components/GenreRadioButtons";
+import Input from "../components/ui/Input";
 
 const Home = ({ movies, addMovie }) => {
   const query = useQuery();
   const history = useHistory();
   const [genreToShow, setGenreToShow] = useState();
+  const [search, setSearch] = useState("");
 
   useEffect(() => setGenreToShow(query.get("genre")), [query]);
 
   const handleRadioButton = genre => history.push(`/?genre=${genre}`);
 
+  const handleChangeSearch = e => setSearch(e.target.value);
+
+  // filter movies by genre and by search
   let moviesToShow = movies;
   if (genreToShow)
     moviesToShow = movies.filter(movie => movie.genres.includes(genreToShow));
+  if (search.length > 0)
+    moviesToShow = moviesToShow.filter(movie =>
+      movie.title.toLowerCase().includes(search.toLowerCase())
+    );
 
   return (
     <>
       <NewMovieForm addMovie={addMovie} />
-      <RadioButton
-        changed={() => handleRadioButton("horror")}
-        id="1"
-        isSelected={genreToShow === "horror"}
-        label="Horror"
-        value="horror"
-      />
-      <RadioButton
-        changed={() => handleRadioButton("romance")}
-        id="2"
-        isSelected={genreToShow === "romance"}
-        label="Romance"
-        value="romance"
-      />
-      <RadioButton
-        changed={() => handleRadioButton("comedy")}
-        id="3"
-        isSelected={genreToShow === "comedy"}
-        label="Comedy"
-        value="comedy"
-      />
-      <Button
-        type="button"
-        value="Reset"
-        small
-        click={() => history.push("/")}
+      <GenreRadioButtons {...{ handleRadioButton, genreToShow, history }} />
+      <Input
+        placeholder="Search a movie"
+        onChange={handleChangeSearch}
+        value={search}
       />
       <MoviesList movies={moviesToShow} />
     </>
