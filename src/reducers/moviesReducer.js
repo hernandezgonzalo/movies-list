@@ -22,7 +22,6 @@ const initState = {
 };
 
 const moviesReducer = (state = initState, action) => {
-  console.log(state, action);
   switch (action.type) {
     case "ADD_MOVIE":
       // if the movie title already exists do not add it
