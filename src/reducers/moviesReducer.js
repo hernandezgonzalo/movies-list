@@ -1,6 +1,12 @@
 const initState = {
   movies: [
     {
+      title: "La vida de Brian",
+      genres: ["comedy"],
+      watched: false,
+      index: 3
+    },
+    {
       title: "El viaje de Chihiro",
       genres: ["fantasy", "drama"],
       watched: false,

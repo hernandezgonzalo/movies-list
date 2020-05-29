@@ -6,13 +6,16 @@ import * as serviceWorker from "./serviceWorker";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import moviesReducer from "./reducers/moviesReducer";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const store = createStore(moviesReducer);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

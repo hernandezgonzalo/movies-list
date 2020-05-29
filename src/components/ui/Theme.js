@@ -11,7 +11,7 @@ const theme = {
   },
   fonts: ["Quicksand", "sans-serif"].join(","),
   fontSizes: {
-    small: "1em",
+    small: "0.8em",
     medium: "2em",
     large: "3em"
   }
