@@ -4,6 +4,8 @@ import styled from "styled-components";
 
 const Table = styled.table`
   border-collapse: collapse;
+  margin: 0 auto;
+  width: 100%;
 
   th {
     background: #ccc;
@@ -17,6 +19,10 @@ const Table = styled.table`
 
   tr:nth-child(even) {
     background: #efefef;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 768px;
   }
 `;
 

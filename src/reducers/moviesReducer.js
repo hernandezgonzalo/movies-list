@@ -8,13 +8,13 @@ const initState = {
     },
     {
       title: "El viaje de Chihiro",
-      genres: ["fantasy", "drama"],
+      genres: ["fantasy"],
       watched: false,
       index: 2
     },
     {
-      title: "Erase una vez en Hollywood",
-      genres: ["drama"],
+      title: "Érase una vez en... Hollywood",
+      genres: ["drama", "comedy"],
       watched: false,
       index: 1
     }
