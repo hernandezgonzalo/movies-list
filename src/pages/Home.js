@@ -5,7 +5,7 @@ import NewMovieForm from "../components/NewMovieForm";
 import { useQuery } from "../hooks/useQuery";
 import { useHistory } from "react-router-dom";
 import GenreRadioButtons from "../components/GenreRadioButtons";
-import Input from "../components/ui/Input";
+import SearchMovie from "../components/SearchMovie";
 
 const Home = ({ movies, addMovie }) => {
   const query = useQuery();
@@ -29,16 +29,16 @@ const Home = ({ movies, addMovie }) => {
     );
 
   return (
-    <>
+    <div>
       <NewMovieForm addMovie={addMovie} />
       <GenreRadioButtons {...{ handleRadioButton, genreToShow, history }} />
-      <Input
+      <SearchMovie
         placeholder="Search a movie"
-        onChange={handleChangeSearch}
+        changed={handleChangeSearch}
         value={search}
       />
       <MoviesList movies={moviesToShow} />
-    </>
+    </div>
   );
 };
 

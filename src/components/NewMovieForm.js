@@ -3,6 +3,17 @@ import { useForm } from "react-hook-form";
 import Button from "./ui/Button";
 import GenreTags from "./GenreTags";
 import Input from "./ui/Input";
+import styled from "styled-components";
+
+const Form = styled.form`
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    flex-flow: row wrap;
+  }
+`;
 
 const NewMovieForm = ({ addMovie }) => {
   const [genres, setGenres] = useState([]);
@@ -22,28 +33,26 @@ const NewMovieForm = ({ addMovie }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          name="title"
-          placeholder="Title"
-          ref={register({ required: true })}
-        />
-        {errors.title && <span>This field is required</span>}
-        <Input
-          name="genre"
-          placeholder="Genre"
-          onKeyPress={e => {
-            if (e.charCode === 13) {
-              e.preventDefault(); // avoid submit when enter is pressed
-              handleAddGenre(e);
-            }
-          }}
-        />
-        <Button value={"Add movie"} type="submit" />
-        <GenreTags genres={genres} />
-      </form>
-    </div>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Input
+        name="title"
+        placeholder="Title"
+        ref={register({ required: true })}
+      />
+      {errors.title && <span>This field is required</span>}
+      <GenreTags genres={genres} />
+      <Input
+        name="genre"
+        placeholder="Genre"
+        onKeyPress={e => {
+          if (e.charCode === 13) {
+            e.preventDefault(); // avoid submit when enter is pressed
+            handleAddGenre(e);
+          }
+        }}
+      />
+      <Button value={"Add movie"} type="submit" />
+    </Form>
   );
 };
 
