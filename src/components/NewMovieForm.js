@@ -6,17 +6,19 @@ import Input from "./ui/Input";
 
 const NewMovieForm = ({ addMovie }) => {
   const [genres, setGenres] = useState([]);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = ({ title }) => {
-    addMovie({ title, genres, watched: false });
+    addMovie({ title, genres });
     setGenres([]);
+    reset();
   };
 
   // add new genre to state
-  const handleAddGenre = value => {
-    const newGenre = value.toLowerCase();
+  const handleAddGenre = ({ target }) => {
+    const newGenre = target.value.toLowerCase();
     if (!genres.includes(newGenre)) setGenres([...genres, newGenre]); // add genre if it is not already in the list
+    target.value = "";
   };
 
   return (
@@ -34,7 +36,7 @@ const NewMovieForm = ({ addMovie }) => {
           onKeyPress={e => {
             if (e.charCode === 13) {
               e.preventDefault(); // avoid submit when enter is pressed
-              handleAddGenre(e.target.value);
+              handleAddGenre(e);
             }
           }}
         />
