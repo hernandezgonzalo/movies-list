@@ -62,6 +62,16 @@ const moviesReducer = (state = initState, action) => {
           }) // move watched movies down the list or move to its original place
       };
 
+    case "UPDATE_MOVIE":
+      return {
+        ...state,
+        movies: state.movies.map(movie =>
+          movie.index === action.index
+            ? { ...movie, title: action.title }
+            : movie
+        )
+      };
+
     default:
       return state;
   }

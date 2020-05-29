@@ -6,6 +6,7 @@ import { useQuery } from "../hooks/useQuery";
 import { useHistory } from "react-router-dom";
 import GenreRadioButtons from "../components/GenreRadioButtons";
 import SearchMovie from "../components/SearchMovie";
+import { addMovie } from "../actions/moviesActions";
 
 const Home = ({ movies, addMovie }) => {
   const query = useQuery();
@@ -45,7 +46,7 @@ const Home = ({ movies, addMovie }) => {
 const mapStateToProps = state => ({ movies: state.movies });
 const mapDispatchToProps = dispatch => ({
   addMovie: movie => {
-    dispatch({ type: "ADD_MOVIE", movie });
+    dispatch(addMovie(movie));
   }
 });
 
