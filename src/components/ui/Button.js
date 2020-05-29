@@ -15,10 +15,19 @@ const Button = styled.input`
   &:hover {
     cursor: pointer;
   }
+
+  ${({ small }) =>
+    small &&
+    `
+    padding: 0.25em;
+    font-weight: normal;
+    border-width: 1px;
+    font-size: 0.8em
+  `}
 `;
 
-const Submit = ({ value }) => {
-  return <Button type="submit" value={value} />;
+const Submit = ({ value, type, small, click }) => {
+  return <Button type={type} value={value} small={small} onClick={click} />;
 };
 
 export default Submit;

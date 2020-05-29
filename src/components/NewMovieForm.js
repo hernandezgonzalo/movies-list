@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Submit from "./ui/Submit";
+import Button from "./ui/Button";
 import GenreTags from "./GenreTags";
 import Input from "./ui/Input";
 
@@ -40,7 +40,7 @@ const NewMovieForm = ({ addMovie }) => {
             }
           }}
         />
-        <Submit value={"Add movie"} />
+        <Button value={"Add movie"} type="submit" />
         <GenreTags genres={genres} />
       </form>
     </div>
