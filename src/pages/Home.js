@@ -6,7 +6,7 @@ import { useQuery } from "../hooks/useQuery";
 import { useHistory } from "react-router-dom";
 import GenreRadioButtons from "../components/GenreRadioButtons";
 import SearchMovie from "../components/SearchMovie";
-import { addMovie } from "../actions/moviesActions";
+import { addMovie } from "../store/actions/moviesActions";
 
 const Home = ({ movies, addMovie }) => {
   const query = useQuery();

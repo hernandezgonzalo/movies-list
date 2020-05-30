@@ -5,7 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import moviesReducer from "./reducers/moviesReducer";
+import moviesReducer from "./store/reducers/moviesReducer";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const store = createStore(moviesReducer);

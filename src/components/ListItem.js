@@ -7,7 +7,7 @@ import {
   toggleWatched,
   removeMovie,
   updateMovie
-} from "../actions/moviesActions";
+} from "../store/actions/moviesActions";
 import TableInput from "./ui/TableInput";
 
 const iconCreator = () => styled(FontAwesomeIcon)`
