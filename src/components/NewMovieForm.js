@@ -5,7 +5,7 @@ import GenreTags from "./GenreTags";
 import Input from "./ui/Input";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { addMovie } from "../store/actions/moviesActions";
+import { addMovieAction } from "../store/actions/moviesActions";
 
 const Form = styled.form`
   display: flex;
@@ -60,7 +60,7 @@ const NewMovieForm = ({ addMovie }) => {
 
 const mapDispatchToProps = dispatch => ({
   addMovie: movie => {
-    dispatch(addMovie(movie));
+    dispatch(addMovieAction(movie));
   }
 });
 

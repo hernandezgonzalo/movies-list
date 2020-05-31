@@ -1,29 +1,10 @@
-const initState = {
-  movies: [
-    {
-      title: "La vida de Brian",
-      genres: ["comedy"],
-      watched: false,
-      index: 3
-    },
-    {
-      title: "El viaje de Chihiro",
-      genres: ["fantasy"],
-      watched: false,
-      index: 2
-    },
-    {
-      title: "Érase una vez en... Hollywood",
-      genres: ["drama", "comedy"],
-      watched: false,
-      index: 1
-    }
-  ],
-  loading: false
-};
+const initState = { movies: [], loading: false };
 
 const moviesReducer = (state = initState, action) => {
   switch (action.type) {
+    case "GET_MOVIES":
+      return { ...state, movies: action.movies };
+
     case "ADD_MOVIE":
       // if the movie title already exists do not add it
       if (state.movies.some(movie => movie.title === action.movie.title))

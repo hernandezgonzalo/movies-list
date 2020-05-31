@@ -8,6 +8,9 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import moviesReducer from "./store/reducers/moviesReducer";
 import { BrowserRouter as Router } from "react-router-dom";
+import setDummyData from "./data";
+
+setDummyData();
 
 const store = createStore(moviesReducer, applyMiddleware(thunk));
 

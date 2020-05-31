@@ -1,11 +1,21 @@
-export const addMovie = movie => {
+import { getMovies } from "../../services/moviesService";
+
+export const getMoviesAction = (genre, search) => {
+  return async function (dispatch) {
+    dispatch({ type: "LOADING" });
+    const movies = await getMovies(genre, search);
+    dispatch({ type: "GET_MOVIES", movies });
+    dispatch({ type: "NOT_LOADING" });
+  };
+};
+
+export const addMovieAction = movie => {
   return function (dispatch) {
-    // here goes the logic before interact with the store
     dispatch({ type: "LOADING" });
     setTimeout(() => {
       dispatch({ type: "ADD_MOVIE", movie });
       dispatch({ type: "NOT_LOADING" });
-    }, 1000); // this simulates an asynchronous action, such as an API call
+    }, 1000);
   };
 };
 
