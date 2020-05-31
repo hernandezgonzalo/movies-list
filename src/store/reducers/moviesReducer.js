@@ -18,7 +18,8 @@ const initState = {
       watched: false,
       index: 1
     }
-  ]
+  ],
+  loading: false
 };
 
 const moviesReducer = (state = initState, action) => {
@@ -71,6 +72,12 @@ const moviesReducer = (state = initState, action) => {
             : movie
         )
       };
+
+    case "LOADING":
+      return { ...state, loading: true };
+
+    case "NOT_LOADING":
+      return { ...state, loading: false };
 
     default:
       return state;

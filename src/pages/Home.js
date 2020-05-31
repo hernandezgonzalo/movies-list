@@ -6,8 +6,9 @@ import { useQuery } from "../hooks/useQuery";
 import { useHistory } from "react-router-dom";
 import GenreRadioButtons from "../components/GenreRadioButtons";
 import SearchMovie from "../components/SearchMovie";
+import Loading from "../components/ui/Loading";
 
-const Home = ({ movies }) => {
+const Home = ({ movies, loading }) => {
   const query = useQuery();
   const history = useHistory();
   const [genreToShow, setGenreToShow] = useState();
@@ -30,6 +31,7 @@ const Home = ({ movies }) => {
 
   return (
     <div>
+      {loading && <Loading />}
       <NewMovieForm />
       <GenreRadioButtons {...{ handleRadioButton, genreToShow, history }} />
       <SearchMovie
@@ -42,6 +44,9 @@ const Home = ({ movies }) => {
   );
 };
 
-const mapStateToProps = state => ({ movies: state.movies });
+const mapStateToProps = state => ({
+  movies: state.movies,
+  loading: state.loading
+});
 
 export default connect(mapStateToProps)(Home);
