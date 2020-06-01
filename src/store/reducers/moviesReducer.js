@@ -1,25 +1,20 @@
 import { sortWatchedMovies } from "../../lib/movies";
 
-const initState = { movies: [], loading: false };
+const initState = [];
 
 const moviesReducer = (state = initState, action) => {
   switch (action.type) {
     case "GET_MOVIES":
-      return { ...state, movies: action.movies };
+      return action.movies;
 
     case "ADD_MOVIE":
-      return { ...state, movies: [action.newMovie, ...state.movies] };
+      return [action.newMovie, ...state];
 
     case "REMOVE_MOVIE":
-      return {
-        ...state,
-        movies: state.movies.filter(
-          movie => movie.title !== action.movieRemoved.title
-        )
-      };
+      return state.filter(movie => movie.title !== action.movieRemoved.title);
 
     case "TOGGLE_WATCHED":
-      const movies = state.movies
+      return state
         .map(movie =>
           movie.index === action.movieToggled.index
             ? action.movieToggled
@@ -27,23 +22,12 @@ const moviesReducer = (state = initState, action) => {
         )
         .sort(sortWatchedMovies);
 
-      return { ...state, movies };
-
     case "UPDATE_MOVIE":
-      return {
-        ...state,
-        movies: state.movies.map(movie =>
-          movie.index === action.movieUpdated.index
-            ? { ...movie, title: action.movieUpdated.title }
-            : movie
-        )
-      };
-
-    case "LOADING":
-      return { ...state, loading: true };
-
-    case "NOT_LOADING":
-      return { ...state, loading: false };
+      return state.map(movie =>
+        movie.index === action.movieUpdated.index
+          ? { ...movie, title: action.movieUpdated.title }
+          : movie
+      );
 
     default:
       return state;
