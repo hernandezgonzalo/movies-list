@@ -1,3 +1,5 @@
+import { sortWatchedMovies } from "../../lib/movies";
+
 const initState = { movies: [], loading: false };
 
 const moviesReducer = (state = initState, action) => {
@@ -17,27 +19,22 @@ const moviesReducer = (state = initState, action) => {
       };
 
     case "TOGGLE_WATCHED":
-      return {
-        ...state,
-        movies: state.movies
-          .map(movie =>
-            movie.title === action.movie.title
-              ? { ...movie, watched: !movie.watched }
-              : movie
-          )
-          .sort((a, b) => {
-            if (a.watched && b.watched) return 0;
-            else if (!a.watched && !b.watched) return b.index - a.index;
-            else return a.watched ? 1 : -1;
-          }) // move watched movies down the list or move to its original place
-      };
+      const movies = state.movies
+        .map(movie =>
+          movie.index === action.movieToggled.index
+            ? action.movieToggled
+            : movie
+        )
+        .sort(sortWatchedMovies);
+
+      return { ...state, movies };
 
     case "UPDATE_MOVIE":
       return {
         ...state,
         movies: state.movies.map(movie =>
-          movie.index === action.index
-            ? { ...movie, title: action.title }
+          movie.index === action.movieUpdated.index
+            ? { ...movie, title: action.movieUpdated.title }
             : movie
         )
       };

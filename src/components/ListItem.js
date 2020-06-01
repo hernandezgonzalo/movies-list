@@ -4,9 +4,9 @@ import { faTrash, faEdit, faSave } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import {
-  toggleWatched,
+  toggleWatchedAction,
   removeMovieAction,
-  updateMovie
+  updateMovieAction
 } from "../store/actions/moviesActions";
 import TableInput from "./ui/TableInput";
 
@@ -83,8 +83,8 @@ const ListItem = ({ movie, removeMovie, toggleWatched, updateMovie }) => {
 
 const mapDispatchToProps = dispatch => ({
   removeMovie: movie => dispatch(removeMovieAction(movie)),
-  toggleWatched: movie => dispatch(toggleWatched(movie)),
-  updateMovie: (title, index) => dispatch(updateMovie(title, index))
+  toggleWatched: movie => dispatch(toggleWatchedAction(movie)),
+  updateMovie: (title, index) => dispatch(updateMovieAction(title, index))
 });
 
 export default connect(null, mapDispatchToProps)(ListItem);

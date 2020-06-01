@@ -1,4 +1,10 @@
-import { getMovies, addMovie, removeMovie } from "../../services/moviesService";
+import {
+  getMovies,
+  addMovie,
+  removeMovie,
+  toggleMovie,
+  updateMovie
+} from "../../services/moviesService";
 
 export const getMoviesAction = (genre, search) => {
   return async function (dispatch) {
@@ -42,22 +48,30 @@ export const removeMovieAction = movie => {
   };
 };
 
-export const toggleWatched = movie => {
-  return function (dispatch) {
+export const toggleWatchedAction = movie => {
+  return async function (dispatch) {
     dispatch({ type: "LOADING" });
-    setTimeout(() => {
-      dispatch({ type: "TOGGLE_WATCHED", movie });
+    try {
+      const movieToggled = await toggleMovie(movie);
+      dispatch({ type: "TOGGLE_WATCHED", movieToggled });
+    } catch (error) {
+      console.log("Error when trying to mark the movie as watched/unwatched");
+    } finally {
       dispatch({ type: "NOT_LOADING" });
-    }, 1000);
+    }
   };
 };
 
-export const updateMovie = (title, index) => {
-  return function (dispatch) {
+export const updateMovieAction = (title, index) => {
+  return async function (dispatch) {
     dispatch({ type: "LOADING" });
-    setTimeout(() => {
-      dispatch({ type: "UPDATE_MOVIE", ...{ title, index } });
+    try {
+      const movieUpdated = await updateMovie(title, index);
+      dispatch({ type: "UPDATE_MOVIE", movieUpdated });
+    } catch (error) {
+      console.log("Error updating the movie");
+    } finally {
       dispatch({ type: "NOT_LOADING" });
-    }, 1000);
+    }
   };
 };

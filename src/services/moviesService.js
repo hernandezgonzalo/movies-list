@@ -1,3 +1,5 @@
+import { sortWatchedMovies } from "../lib/movies";
+
 export const getMovies = (genre, search) => {
   return new Promise((resolve, reject) => {
     const movies = JSON.parse(sessionStorage.getItem("movies"));
@@ -51,5 +53,41 @@ export const removeMovie = movieToRemove => {
 
     sessionStorage.setItem("movies", JSON.stringify(newMoviesArr));
     setTimeout(() => resolve(movieToRemove), 1000);
+  });
+};
+
+export const toggleMovie = movieToToggle => {
+  return new Promise((resolve, reject) => {
+    const movies = JSON.parse(sessionStorage.getItem("movies"));
+
+    const newMoviesArr = movies
+      .map(movie =>
+        movie.title === movieToToggle.title
+          ? { ...movie, watched: !movie.watched }
+          : movie
+      )
+      .sort(sortWatchedMovies);
+
+    const movieToggled = newMoviesArr.find(
+      movie => movie.title === movieToToggle.title
+    );
+
+    sessionStorage.setItem("movies", JSON.stringify(newMoviesArr));
+    setTimeout(() => resolve(movieToggled), 1000);
+  });
+};
+
+export const updateMovie = (title, index) => {
+  return new Promise((resolve, reject) => {
+    const movies = JSON.parse(sessionStorage.getItem("movies"));
+
+    const moviesUpdated = movies.map(movie =>
+      movie.index === index ? { ...movie, title } : movie
+    );
+
+    const movieUpdated = moviesUpdated.find(movie => movie.index === index);
+
+    sessionStorage.setItem("movies", JSON.stringify(moviesUpdated));
+    setTimeout(() => resolve(movieUpdated), 1000);
   });
 };
