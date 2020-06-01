@@ -17,12 +17,12 @@ const Form = styled.form`
   }
 `;
 
-const NewMovieForm = ({ addMovie }) => {
+const NewMovieForm = ({ addMovie, genreToShow }) => {
   const [genres, setGenres] = useState([]);
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = ({ title }) => {
-    addMovie({ title, genres });
+    addMovie({ title, genres }, genreToShow);
     setGenres([]);
     reset();
   };
@@ -59,8 +59,8 @@ const NewMovieForm = ({ addMovie }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  addMovie: movie => {
-    dispatch(addMovieAction(movie));
+  addMovie: (movie, genreToShow) => {
+    dispatch(addMovieAction(movie, genreToShow));
   }
 });
 

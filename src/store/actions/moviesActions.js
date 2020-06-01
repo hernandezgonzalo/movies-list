@@ -20,12 +20,13 @@ export const getMoviesAction = (genre, search) => {
   };
 };
 
-export const addMovieAction = movie => {
+export const addMovieAction = (movie, genreToShow) => {
   return async function (dispatch) {
     dispatch({ type: "LOADING" });
     try {
       const newMovie = await addMovie(movie);
-      if (newMovie) dispatch({ type: "ADD_MOVIE", newMovie });
+      if (newMovie?.genres.includes(genreToShow) || !genreToShow)
+        dispatch({ type: "ADD_MOVIE", newMovie });
     } catch (error) {
       console.log("This movie already exists");
     } finally {

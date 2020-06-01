@@ -32,7 +32,7 @@ const Home = ({ movies, loading, getMovies }) => {
   return (
     <div>
       {loading && <Loading />}
-      <NewMovieForm />
+      <NewMovieForm genreToShow={genreToShow} />
       <GenreRadioButtons {...{ handleRadioButton, genreToShow, history }} />
       <SearchMovie
         placeholder="Search a movie"
