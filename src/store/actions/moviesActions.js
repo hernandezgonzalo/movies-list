@@ -1,11 +1,16 @@
-import { getMovies, addMovie } from "../../services/moviesService";
+import { getMovies, addMovie, removeMovie } from "../../services/moviesService";
 
 export const getMoviesAction = (genre, search) => {
   return async function (dispatch) {
     dispatch({ type: "LOADING" });
-    const movies = await getMovies(genre, search);
-    dispatch({ type: "GET_MOVIES", movies });
-    dispatch({ type: "NOT_LOADING" });
+    try {
+      const movies = await getMovies(genre, search);
+      dispatch({ type: "GET_MOVIES", movies });
+    } catch (error) {
+      console.log("Error while retrieving the movies");
+    } finally {
+      dispatch({ type: "NOT_LOADING" });
+    }
   };
 };
 
@@ -23,13 +28,17 @@ export const addMovieAction = movie => {
   };
 };
 
-export const removeMovie = movie => {
-  return function (dispatch) {
+export const removeMovieAction = movie => {
+  return async function (dispatch) {
     dispatch({ type: "LOADING" });
-    setTimeout(() => {
-      dispatch({ type: "REMOVE_MOVIE", movie });
+    try {
+      const movieRemoved = await removeMovie(movie);
+      dispatch({ type: "REMOVE_MOVIE", movieRemoved });
+    } catch (error) {
+      console.log("The movie could not be removed");
+    } finally {
       dispatch({ type: "NOT_LOADING" });
-    }, 1000);
+    }
   };
 };
 

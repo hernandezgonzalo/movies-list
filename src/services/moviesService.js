@@ -39,3 +39,17 @@ export const addMovie = movieToAdd => {
     setTimeout(() => resolve(newMovie), 1000);
   });
 };
+
+export const removeMovie = movieToRemove => {
+  return new Promise((resolve, reject) => {
+    const movies = JSON.parse(sessionStorage.getItem("movies"));
+
+    // remove the movie from the original array
+    const newMoviesArr = movies.filter(
+      movie => movie.title !== movieToRemove.title
+    );
+
+    sessionStorage.setItem("movies", JSON.stringify(newMoviesArr));
+    setTimeout(() => resolve(movieToRemove), 1000);
+  });
+};

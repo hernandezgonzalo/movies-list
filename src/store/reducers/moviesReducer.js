@@ -11,7 +11,9 @@ const moviesReducer = (state = initState, action) => {
     case "REMOVE_MOVIE":
       return {
         ...state,
-        movies: state.movies.filter(movie => movie.title !== action.movie.title)
+        movies: state.movies.filter(
+          movie => movie.title !== action.movieRemoved.title
+        )
       };
 
     case "TOGGLE_WATCHED":

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import {
   toggleWatched,
-  removeMovie,
+  removeMovieAction,
   updateMovie
 } from "../store/actions/moviesActions";
 import TableInput from "./ui/TableInput";
@@ -82,7 +82,7 @@ const ListItem = ({ movie, removeMovie, toggleWatched, updateMovie }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  removeMovie: movie => dispatch(removeMovie(movie)),
+  removeMovie: movie => dispatch(removeMovieAction(movie)),
   toggleWatched: movie => dispatch(toggleWatched(movie)),
   updateMovie: (title, index) => dispatch(updateMovie(title, index))
 });
