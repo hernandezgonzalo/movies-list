@@ -1,4 +1,4 @@
-import { getMovies } from "../../services/moviesService";
+import { getMovies, addMovie } from "../../services/moviesService";
 
 export const getMoviesAction = (genre, search) => {
   return async function (dispatch) {
@@ -10,12 +10,16 @@ export const getMoviesAction = (genre, search) => {
 };
 
 export const addMovieAction = movie => {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch({ type: "LOADING" });
-    setTimeout(() => {
-      dispatch({ type: "ADD_MOVIE", movie });
+    try {
+      const newMovie = await addMovie(movie);
+      if (newMovie) dispatch({ type: "ADD_MOVIE", newMovie });
+    } catch (error) {
+      console.log("This movie already exists");
+    } finally {
       dispatch({ type: "NOT_LOADING" });
-    }, 1000);
+    }
   };
 };
 

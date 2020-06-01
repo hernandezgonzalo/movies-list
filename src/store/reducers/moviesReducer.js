@@ -6,21 +6,7 @@ const moviesReducer = (state = initState, action) => {
       return { ...state, movies: action.movies };
 
     case "ADD_MOVIE":
-      // if the movie title already exists do not add it
-      if (state.movies.some(movie => movie.title === action.movie.title))
-        return state;
-
-      // set new movie and add to the list
-      const newMovie = {
-        ...action.movie,
-        watched: false,
-        index:
-          state.movies.reduce(
-            (prev, curr) => (curr.index > prev ? curr.index : prev),
-            0
-          ) + 1 // get the highest index in the list and add one
-      };
-      return { ...state, movies: [newMovie, ...state.movies] };
+      return { ...state, movies: [action.newMovie, ...state.movies] };
 
     case "REMOVE_MOVIE":
       return {
