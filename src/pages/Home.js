@@ -6,7 +6,7 @@ import { useQuery } from "../hooks/useQuery";
 import { useHistory } from "react-router-dom";
 import GenreRadioButtons from "../components/GenreRadioButtons";
 import SearchMovie from "../components/SearchMovie";
-import Loading from "../components/ui/Loading";
+import Loader from "../components/ui/Loader";
 import { getMoviesAction } from "../store/actions/moviesActions";
 
 const Home = ({ movies, loading, getMovies }) => {
@@ -31,7 +31,7 @@ const Home = ({ movies, loading, getMovies }) => {
 
   return (
     <div>
-      {loading && <Loading />}
+      {loading && <Loader />}
       <NewMovieForm genreToShow={genreToShow} />
       <GenreRadioButtons {...{ handleRadioButton, genreToShow, history }} />
       <SearchMovie
