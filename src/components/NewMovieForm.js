@@ -4,6 +4,8 @@ import Button from "./ui/Button";
 import GenreTags from "./GenreTags";
 import Input from "./ui/Input";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { addMovieAction } from "../store/actions/moviesActions";
 
 const Form = styled.form`
   display: flex;
@@ -15,12 +17,12 @@ const Form = styled.form`
   }
 `;
 
-const NewMovieForm = ({ addMovie }) => {
+const NewMovieForm = ({ addMovie, genreToShow }) => {
   const [genres, setGenres] = useState([]);
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = ({ title }) => {
-    addMovie({ title, genres });
+    addMovie({ title, genres }, genreToShow);
     setGenres([]);
     reset();
   };
@@ -56,4 +58,10 @@ const NewMovieForm = ({ addMovie }) => {
   );
 };
 
-export default NewMovieForm;
+const mapDispatchToProps = dispatch => ({
+  addMovie: (movie, genreToShow) => {
+    dispatch(addMovieAction(movie, genreToShow));
+  }
+});
+
+export default connect(null, mapDispatchToProps)(NewMovieForm);
