@@ -1,6 +1,6 @@
 // using sessionStorage as data base
 
-const initState = {
+export const initState = {
   movies: [
     {
       title: "La vida de Brian",

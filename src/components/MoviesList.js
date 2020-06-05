@@ -30,9 +30,8 @@ const MoviesList = ({ movies }) => {
   return (
     <Table>
       <tbody>
-        {movies.map((movie, index) => (
-          <ListItem key={index} movie={movie} />
-        ))}
+        {movies &&
+          movies.map((movie, index) => <ListItem key={index} movie={movie} />)}
       </tbody>
     </Table>
   );

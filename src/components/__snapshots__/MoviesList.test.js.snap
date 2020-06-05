@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviesList should render correctly with no props 1`] = `
+<styled.table>
+  <tbody />
+</styled.table>
+`;
+
+exports[`MoviesList should render correctly with props 1`] = `
+<styled.table>
+  <tbody>
+    <Connect(ListItem)
+      key="0"
+      movie={
+        Object {
+          "genres": Array [
+            "comedy",
+          ],
+          "index": 3,
+          "title": "La vida de Brian",
+          "watched": false,
+        }
+      }
+    />
+    <Connect(ListItem)
+      key="1"
+      movie={
+        Object {
+          "genres": Array [
+            "fantasy",
+          ],
+          "index": 2,
+          "title": "El viaje de Chihiro",
+          "watched": false,
+        }
+      }
+    />
+    <Connect(ListItem)
+      key="2"
+      movie={
+        Object {
+          "genres": Array [
+            "drama",
+            "comedy",
+          ],
+          "index": 1,
+          "title": "Érase una vez en... Hollywood",
+          "watched": false,
+        }
+      }
+    />
+  </tbody>
+</styled.table>
+`;
