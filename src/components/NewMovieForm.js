@@ -17,7 +17,7 @@ const Form = styled.form`
   }
 `;
 
-const NewMovieForm = ({ addMovie, genreToShow }) => {
+export const NewMovieForm = ({ addMovie, genreToShow }) => {
   const [genres, setGenres] = useState([]);
   const { register, handleSubmit, errors, reset } = useForm();
 
@@ -53,7 +53,7 @@ const NewMovieForm = ({ addMovie, genreToShow }) => {
           }
         }}
       />
-      <Button value={"Add movie"} type="submit" />
+      <Button value="Add movie" type="submit" />
     </Form>
   );
 };
